@@ -1,19 +1,44 @@
-/**
- * Write your model definitions here
- */
 
 namespace org.wolf.wolfcoin
 
-participant User identified by email {
-  o String email
+participant Wolfer identified by wolferId{
+  o String wolferId
+  o String name
+  o String lastname
+  o String country
 }
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  o String value
+asset WolfSafe identified by safeId{
+  o String safeId
+  o Double amount
+  o CoinTransaction[] transactions optional
+  --> Wolfer owner
 }
 
-transaction ChangeAssetValue {
-  o String newValue
-  --> Asset relatedAsset
+concept CoinTransaction {
+  o Double amount
+  o TransactionType type
+}
+
+enum TransactionType{
+  o DEPOSIT
+  o WITHDRAW
+  o SEND
+  o RECIEVE
+}
+
+transaction DepositCoin{
+  o Double amount
+  --> WolfSafe safe
+}
+
+transaction WithdrawCoin{
+  o Double amount
+  --> WolfSafe safe
+}
+
+transaction ExchangeCoin{
+  o WolfSafe sender
+  o WolfSafe reciever
+  o Double amount
 }

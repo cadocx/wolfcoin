@@ -10,9 +10,9 @@ function depositCoin(transaction){
 
     const factory = getFactory();
 
-    //add amount to vault
-    let vault = transaction.vault;
-    vault += transaction.amount;
+    //add amount to safe
+    let safe = transaction.safe;
+    safe += transaction.amount;
 
     //create a new transaction and set properties
     const newTransaction = factory.newConcept(config.project, "CoinTransaction");
@@ -20,10 +20,10 @@ function depositCoin(transaction){
     newTransaction.type = "DEPOSIT";
 
     //if there are previous transactions, concat the new one
-    if(vault.transactions){
-        vault.transactions.push(newTransaction)
+    if(safe.transactions){
+        safe.transactions.push(newTransaction)
     }else{
-        vault.transactions = [newTransaction]
+        safe.transactions = [newTransaction]
     }
     
     return getAssetRegistry(config.safe)
@@ -36,21 +36,21 @@ function depositCoin(transaction){
 }
 
 function withdrawCoin(transaction){
-    const vault = transaction.vault;
-    if(transaction.amount>vault.amount || transaction.amount<=10 || transaction.amount>1000000){
+    const safe = transaction.safe;
+    if(transaction.amount>safe.amount || transaction.amount<=10 || transaction.amount>1000000){
         throw Error("Invalid amount");
     }
 
     const factory = getFactory();
-    vault.amount = vault.amount - transaction.amount;
+    safe.amount = safe.amount - transaction.amount;
     const newTransaction = factory.newConcept(config.project, "CoinTransaction");
     newTransaction.amount = transaction.amount;
     newTransaction.tpe = "WITHDRAWAL";
 
-    if(vault.transactions){
-        vault.transactions.push(newTransaction)
+    if(safe.transactions){
+        safe.transactions.push(newTransaction)
     }else{
-        vault.transactions = [newTransaction];
+        safe.transactions = [newTransaction];
     }
 
     return getAssetRegistry(config.safe)

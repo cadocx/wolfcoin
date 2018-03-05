@@ -1,0 +1,25 @@
+
+rule SeeYourAccount{
+  description: "Intereact with your own safe"
+  participant: "org.wolf.wolfcoin.Wolfer"
+  operation: READ
+  resource: "org.wolf.wolfcoin.*"
+  action: ALLOW
+}
+
+rule SeeYourVault {
+  description: "See only your vault"
+  participant(p): "org.wolf.wolfcoin.Wolfer"
+  operation: ALL
+  resource(r): "org.wolf.wolfcoin.Safe"
+  condition: (p.getIdentifier() == r.owner.getIdentifier())
+  action: ALLOW
+}
+
+rule Admin{
+  description: "Allow admins full access"
+  participant: "ANY"
+  operation: ALL
+  resource: "org.wolf.wolfcoin.*"
+  action: ALLOW
+}

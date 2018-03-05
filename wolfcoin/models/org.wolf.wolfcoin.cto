@@ -8,7 +8,7 @@ participant Wolfer identified by wolferId{
   o String country
 }
 
-asset WolfSafe identified by safeId{
+asset Safe identified by safeId{
   o String safeId
   o Double amount
   o CoinTransaction[] transactions optional
@@ -29,16 +29,16 @@ enum TransactionType{
 
 transaction DepositCoin{
   o Double amount
-  --> WolfSafe safe
+  --> Safe safe
 }
 
 transaction WithdrawCoin{
   o Double amount
-  --> WolfSafe safe
+  --> Safe safe
 }
 
 transaction ExchangeCoin{
-  o WolfSafe sender
-  o WolfSafe reciever
+  o Safe sender
+  o Safe reciever
   o Double amount
 }

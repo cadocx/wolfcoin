@@ -1,0 +1,22 @@
+{
+  "name": "wolfcoin",
+  "version": "0.0.1",
+  "description": "Wolfcoin is the best coin.",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "author": "Ozbey",
+  "email": "wolf@wolf.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "composer-admin": "latest",
+    "composer-client": "latest",
+    "composer-common": "latest",
+    "composer-connector-embedded": "latest",
+    "chai": "latest",
+    "eslint": "latest",
+    "istanbul": "latest",
+    "mkdirp": "latest",
+    "mocha": "latest"
+  }
+}

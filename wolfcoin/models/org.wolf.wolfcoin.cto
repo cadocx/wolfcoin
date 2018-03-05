@@ -22,9 +22,9 @@ concept CoinTransaction {
 
 enum TransactionType{
   o DEPOSIT
-  o WITHDRAW
+  o WITHDRAWAL
   o SEND
-  o RECIEVE
+  o RECEIVE
 }
 
 transaction DepositCoin{
